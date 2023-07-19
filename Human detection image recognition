@@ -1,0 +1,14 @@
+NAME : RIYA RAJPUT
+
+import cv2
+
+cascade_path = cv2.data.haarcascades + 'haarcascade_fullbody.xml'
+cascade_classifier = cv2.CascadeClassifier(cascade_path)
+image_path = '/content/Human Detection.jpg'
+image = cv2.imread(image_path)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+humans = cascade_classifier.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+for (x, y, w, h) in humans:
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)   #(0,255,255) MAKES YELLOW COLOUR
+from google.colab.patches import cv2_imshow
+cv2_imshow(image)
